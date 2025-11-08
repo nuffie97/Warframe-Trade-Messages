@@ -1,0 +1,159 @@
+:root {
+    --color-primary: #00A6FF;
+    --color-secondary: #FFC107;
+    --color-background: #141418;
+    --color-card: #1F1F24;
+    --color-text-light: #E0E0E0;
+    --color-text-dark: #111;
+    --color-success: #4CAF50;
+    --color-reset: #aa4444;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-light);
+    margin: 0;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    max-width: 500px;
+    width: 100%;
+    background-color: #212128;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    border-top: 3px solid var(--color-primary);
+}
+
+h1 { text-align: center; color: var(--color-primary); margin-top: 0; }
+h2 {
+    color: var(--color-text-light);
+    font-size: 1.2em;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+.section { margin-bottom: 25px; }
+
+/* Lade-Status */
+.loading {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: var(--color-secondary);
+}
+
+/* Input-Gruppe */
+.input-group {
+    display: flex;
+    gap: 10px;
+}
+input[type="text"] {
+    flex-grow: 1;
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #2D2D33;
+    color: var(--color-text-light);
+    font-size: 1.1em;
+    box-sizing: border-box;
+}
+.btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+.btn-add {
+    font-size: 2em;
+    background-color: var(--color-success);
+    color: white;
+    padding: 0 20px;
+}
+
+/* Aktuelle Liste (Pills) */
+#current-list-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 10px;
+    background-color: var(--color-card);
+    border-radius: 5px;
+    min-height: 40px;
+}
+.empty-list-msg {
+    color: #777;
+    font-style: italic;
+    margin: 5px 0;
+}
+.item-pill {
+    background-color: var(--color-primary);
+    color: var(--color-text-dark);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+}
+.item-pill .item-name {
+    margin-right: 8px;
+}
+.item-pill .item-price {
+    color: #eee;
+    background-color: #333;
+    padding: 2px 6px;
+    border-radius: 5px;
+    font-size: 0.9em;
+}
+.item-pill .remove-item {
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--color-text-dark);
+}
+
+/* Vorschau & Aktionen */
+textarea#message-preview {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #111;
+    color: var(--color-secondary);
+    font-size: 1.1em;
+    font-weight: bold;
+    resize: none;
+    margin-bottom: 15px;
+}
+.btn-copy {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-primary);
+    color: var(--color-text-dark);
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+.btn-copy.copied {
+    background-color: var(--color-success);
+    color: white;
+}
+.btn-reset {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    border: 2px solid var(--color-reset);
+    color: var(--color-reset);
+    font-size: 1em;
+}
+.btn-reset:hover {
+    background-color: var(--color-reset);
+    color: white;
+}
