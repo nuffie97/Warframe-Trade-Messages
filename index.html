@@ -1,49 +1,32 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Warframe VK Listen-Builder</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body>
     <div class="container">
+        
+        <a href="/" class="btn-home">« Zurück zur App-Übersicht</a>
+        
         <h1>VK Listen-Builder</h1>
 
-        <div id="loading-status" class="loading">
-            Lade Prime-Datenbank...
-        </div>
+        ```
 
-        <section id="input-section" class="section" style="display: none;">
-            <h2>Item hinzufügen</h2>
-            <div class="input-group">
-                <input type="text" id="smart-input" list="item-list" placeholder="z.B. Volt Prime 150">
-                <datalist id="item-list">
-                    </datalist>
-                <button id="add-item-btn" class="btn btn-add">+</button>
-            </div>
-        </section>
+### 📁 `style.css` (im `vk` Ordner)
 
-        <section class="section">
-            <h2>Aktuelle Liste</h2>
-            <div id="current-list-display">
-                <p class="empty-list-msg">Noch keine Items hinzugefügt.</p>
-            </div>
-        </section>
+Füge den folgenden Code-Block **ganz am Ende** deiner CSS-Datei ein. Er nutzt die Farbvariablen (`--color-primary`, etc.), die wir schon definiert haben.
 
-        <section class="section">
-            <h2>Finale Nachricht</h2>
-            <textarea id="message-preview" readonly rows="3"></textarea>
-            
-            <button id="copy-btn" class="btn btn-copy">
-                Nachricht Kopieren
-            </button>
-            <button id="reset-btn" class="btn btn-reset">
-                Ganze Liste leeren
-            </button>
-        </section>
-
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+```css
+/* --- NEU: Home-Button Style --- */
+.btn-home {
+    display: inline-block;
+    background-color: var(--color-card);
+    color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    padding: 8px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    transition: background-color 0.2s, color 0.2s;
+}
+.btn-home:hover {
+    background-color: var(--color-primary);
+    color: var(--color-text-dark);
+}
