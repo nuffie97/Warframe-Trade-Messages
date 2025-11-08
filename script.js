@@ -2,16 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Globaler Zustand
     let currentItems = []; // Array für {name: 'Volt Prime', price: '150'}
-    let primeSetDB = [];   // Unsere GEFILTERTE Datenbank
-
-    // Wörter, die Prime-TEILE definieren (zum Herausfiltern)
-    const PART_KEYWORDS = [
-        'Gehäuse', 'Chassis', 'Neuroptik', 'Neuroptics', 'Systeme', 'Systems', 
-        'Blaupause', 'Blueprint', 'Lauf', 'Barrel', 'Empfänger', 'Receiver', 
-        'Schaft', 'Stock', 'Griff', 'Grip', 'Klinge', 'Blade', 'Kopf', 'Head', 
-        'Verbindung', 'Link', 'Heatsink', 'String', 'Lower Limb', 'Upper Limb', 
-        'Pouch', 'Carapace', 'Cerebrum', 'Set' // "Set" auch, da "Volt Prime Set" kein Item-Name ist
-    ];
+    
+    // --- GELÖSCHT ---
+    // Die 'PART_KEYWORDS' und 'primeSetDB' Variablen werden nicht mehr gebraucht.
 
     // DOM-Elemente
     const loadingStatus = document.getElementById('loading-status');
@@ -30,33 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function initDatabase() {
         try {
-            const response = await fetch('/vk/database.json');
+            const response = await fetch('./database.json'); // oder '/vk/database.json'
             if (!response.ok) throw new Error('database.json nicht gefunden');
             
+            // allItems ist jetzt dein Array: ["Acceltra Prime", "Volt Prime", ...]
             const allItems = await response.json();
 
-            // DER NEUE FILTER:
-            primeSetDB = allItems.filter(item => {
-                const name = item.name;
-                
-                // 1. Muss handelbar sein und "Prime" im Namen haben
-                if (!item.tradable || !name.includes('Prime')) {
-                    return false;
-                }
-                
-                // 2. Darf KEINES der Schlüsselwörter für Teile enthalten
-                // .some() prüft, ob *irgendein* Wort aus der Liste im Namen vorkommt
-                const isPart = PART_KEYWORDS.some(keyword => name.includes(keyword));
-                
-                return !isPart; // Behalte es, wenn es KEIN Teil ist
-            });
-
-            // Fülle die Datalist
-            primeSetDB.forEach(item => {
+            // --- NEUE, VEREINFACHTE LOGIK ---
+            // Da die Liste schon sauber ist, müssen wir nicht mehr filtern.
+            // Wir füllen die Datalist direkt.
+            allItems.forEach(itemName => {
                 const option = document.createElement('option');
-                option.value = item.name;
+                option.value = itemName; // 'itemName' ist jetzt der String selbst
                 datalist.appendChild(option);
             });
+            // --- ENDE DER NEUEN LOGIK ---
 
             loadingStatus.style.display = 'none';
             inputSection.style.display = 'block';
@@ -88,14 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
             itemName = rawInput;
         }
 
-        // Füge das Objekt zum Array hinzu
         currentItems.push({ name: itemName, price: price });
 
-        // Aktualisiere die UI
         updateCurrentListDisplay();
         updateFinalPreview();
-
-        // Setze das Eingabefeld zurück
         smartInput.value = '';
     }
 
@@ -103,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Zeigt die "Pills" der hinzugefügten Items an.
      */
     function updateCurrentListDisplay() {
-        listDisplay.innerHTML = ''; // Leere die Liste
+        listDisplay.innerHTML = ''; 
         
         if (currentItems.length === 0) {
             listDisplay.innerHTML = '<p class="empty-list-msg">Noch keine Items hinzugefügt.</p>';
@@ -150,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleListClick(e) {
         if (e.target.classList.contains('remove-item')) {
             const indexToRemove = parseInt(e.target.dataset.index);
-            currentItems.splice(indexToRemove, 1); // Entferne das Item am Index
+            currentItems.splice(indexToRemove, 1);
             
             updateCurrentListDisplay();
             updateFinalPreview();
@@ -187,10 +164,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Event Listeners ---
     addItemBtn.addEventListener('click', addItemToList);
     
-    // Erlaube "Enter" im Input-Feld, um ein Item hinzuzufügen
     smartInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            e.preventDefault(); // Verhindert, dass das Formular abgeschickt wird
+            e.preventDefault(); 
             addItemToList();
         }
     });
