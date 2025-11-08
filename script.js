@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     async function initDatabase() {
         try {
-            const response = await fetch('./database.json');
+            const response = await fetch('/vk/database.json');
             if (!response.ok) throw new Error('database.json nicht gefunden');
             
             const allItems = await response.json();
